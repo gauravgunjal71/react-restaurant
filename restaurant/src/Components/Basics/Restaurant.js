@@ -7,23 +7,34 @@ import Navbar from "./Navbar";
 const Restaurant = () => {
     const [menuData, setMenuData] = useState(Menu);
 
-	const filtercategory = (category) => {
-		const updatedData = Menu.filter(curElem => {
-			if (category === "all") return curElem
-			return curElem.category === category
-		})
-		setMenuData(updatedData);
-	}
+    const filtercategory = (category) => {
+        const updatedData = Menu.filter((curElem) => {
+            return curElem.category === category;
+        });
+
+        setMenuData(updatedData);
+    };
+
+    const categories = [];
+
+    Menu.map((curElem) => {
+        if (!categories.includes(curElem.category)) categories.push(curElem.category);
+    });
 
     return (
         <>
-			<nav className="navbar">
+            <nav className="navbar">
                 <div className="btn-group">
-                    <button className="btn-group__item" onClick={() => filtercategory("breakfast")}>Breakfast</button>
-                    <button className="btn-group__item" onClick={() => filtercategory("lunch")}>Lunch</button>
-                    <button className="btn-group__item" onClick={() => filtercategory("evening")}>Evening</button>
-                    <button className="btn-group__item" onClick={() => filtercategory("dinner")}>Dinner</button>
-                    <button className="btn-group__item" onClick={() => filtercategory("all")}>All</button>
+                    {categories.map((curElem) => {
+                        return (
+                            <button key={curElem} className="btn-group__item" onClick={() => filtercategory(curElem)}>
+                                {curElem}
+                            </button>
+                        );
+                    })}
+                    <button className="btn-group__item" onClick={() => setMenuData(Menu)}>
+                        All
+                    </button>
                 </div>
             </nav>
 

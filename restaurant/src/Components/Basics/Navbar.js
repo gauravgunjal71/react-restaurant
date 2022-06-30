@@ -1,16 +1,22 @@
 import React from "react";
+import Menu from "./menuApi";
 import "./styles.css";
 
-const Navbar = () => {
+const Navbar = ({filtercategory, setMenuData, categories}) => {
     return (
         <div>
             <nav className="navbar">
                 <div className="btn-group">
-                    <button className="btn-group__item">Breakfast</button>
-                    <button className="btn-group__item">Lunch</button>
-                    <button className="btn-group__item">Evening</button>
-                    <button className="btn-group__item">Dinner</button>
-                    <button className="btn-group__item">All</button>
+                    {categories.map((curElem) => {
+                        return (
+                            <button key={curElem} className="btn-group__item" onClick={() => filtercategory(curElem)}>
+                                {curElem}
+                            </button>
+                        );
+                    })}
+                    <button className="btn-group__item" onClick={() => setMenuData(Menu)}>
+                        All
+                    </button>
                 </div>
             </nav>
         </div>

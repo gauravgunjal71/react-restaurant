@@ -21,9 +21,11 @@ const Restaurant = () => {
         if (!categories.includes(curElem.category)) categories.push(curElem.category);
     });
 
+	const [uniqueCategories, setUniqueCategories] = useState(categories);
+
     return (
         <>
-            <Navbar filtercategory={filtercategory} setMenuData={setMenuData} categories={categories}/>
+            <Navbar filtercategory={filtercategory} setMenuData={setMenuData} categories={uniqueCategories}/>
 
             <MenuCard menuData={menuData} />
         </>
